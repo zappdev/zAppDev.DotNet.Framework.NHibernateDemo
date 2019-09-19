@@ -5,6 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using NHibernate;
+using NHibernateDemo.DAL;
+using zAppDev.DotNet.Framework.Utilities;
 
 namespace NHibernateDemo
 {
@@ -20,7 +25,24 @@ namespace NHibernateDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            var factory = DBSessionManager.CreateSessionFactory(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddSingleton<ISessionFactory>(provider => factory);
+            services.AddScoped<ISession>((provider) =>
+            {
+                var sessionFactory = provider.GetService<ISessionFactory>();
+                var session = sessionFactory.OpenSession();
+                session.FlushMode = FlushMode.Manual;
+                return session;
+            });
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options => {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.ContractResolver = new NHibernateContractResolver
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    };
+                });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

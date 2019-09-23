@@ -11,7 +11,8 @@ using zAppDev.DotNet.Framework.Utilities;
 namespace NHibernateDemo.Controllers
 {
     [Route("api/[controller]")]
-    public class TeamsController : Controller
+    [ApiController]
+    public class TeamsController : ControllerBase
     {
         public ServiceLocator ServiceLocator { get; }
 

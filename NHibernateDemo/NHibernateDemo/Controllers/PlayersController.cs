@@ -11,7 +11,8 @@ using zAppDev.DotNet.Framework.Utilities;
 namespace NHibernateDemo.Controllers
 {
     [Route("api/[controller]")]
-    public class PlayersController : Controller
+    [ApiController]
+    public class PlayersController : ControllerBase
     {
         public ServiceLocator ServiceLocator { get; }
         private ISession _session { get; set; }

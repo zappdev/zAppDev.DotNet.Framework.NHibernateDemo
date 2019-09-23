@@ -16,6 +16,7 @@ export class TeamsListComponent implements OnInit {
   constructor(private _teamService: TeamsService, private _router: Router) { }
 
   ngOnInit() {
+    this.loadTeams();
   }
 
   loadTeams() {

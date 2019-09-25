@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="NHibernate" Version="5.2.6" />
+    <PackageReference Include="zAppDev.DotNet.Framework" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +30,6 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\Models\Player.ts" />
     <None Remove="ClientApp\src\app\Models\Team.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\zAppDev.DotNet.Framework\src\zAppDev.DotNet.Framework\zAppDev.DotNet.Framework.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,3 +23,7 @@ This walkthrough tutorial will show how to use the zAppDev Framework NHibernate 
                 NamingStrategy = new CamelCaseNamingStrategy()
             };
         });
+
+## License
+
+The **zAppDev.DotNet.Framework.NHibernateDemo** is licensed as AGPL software.
